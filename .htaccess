@@ -1,0 +1,14 @@
+Options +FollowSymlinks
+RewriteEngine On
+RewriteBase /
+RewriteCond %{HTTPS} off
+RewriteRule (.*) https://%{HTTP_HOST}%{REQUEST_URI} [R=301,L]
+RewriteRule ^index\.html? index.php [NC,R]
+RewriteRule ^news\.html? news.php [NC,R]
+RewriteRule ^gallery\.html? gallery.php [NC,R]
+ErrorDocument 400 /400.php
+ErrorDocument 401 /401.php
+ErrorDocument 403 /403.php
+ErrorDocument 404 /404.php
+ErrorDocument 500 /500.php
+DirectoryIndex index.php

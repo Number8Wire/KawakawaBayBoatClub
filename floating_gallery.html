@@ -1,0 +1,189 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+	<title>Floating image gallery with drag &amp; drop</title>
+	<style type="text/css">
+	body{
+		/*
+		You can remove these four options
+
+		*/
+		background-image:url('http://www.dhtmlgoodies.com/images/heading3.gif');
+		background-repeat:no-repeat;
+		padding-top:85px;
+		font-family: Trebuchet MS, Lucida Sans Unicode, Arial, sans-serif;
+
+
+		height:100%;
+		width:100%;
+		margin:10px;
+		padding-left:0px;
+	}
+
+	form{
+		display:inline;
+	}
+	.imageBox,.imageBoxHighlighted{
+		width:130px;	/* Total width of each image box */
+		height:160px;	/* Total height of each image box */
+		float:left;
+	}
+	.imageBox_theImage{
+		width:110px;	/* Width of image */
+		height:125px;	/* Height of image */
+
+		/*
+		Don't change these values *
+		*/
+		background-position: center center;
+		background-repeat: no-repeat;
+		margin: 0 auto;
+		margin-bottom:2px;
+	}
+
+	.imageBox .imageBox_theImage{
+		border:1px solid #DDD;	/* Border color for not selected images */
+		padding:2px;
+	}
+	.imageBoxHighlighted .imageBox_theImage{
+		border:3px solid #316AC5;	/* Border color for selected image */
+		padding:0px;
+
+	}
+	.imageBoxHighlighted span{	/* Title of selected image */
+		background-color: #316AC5;
+		color:#FFFFFF;
+		padding:2px;
+	}
+
+	.imageBox_label{	/* Title of images - both selected and not selected */
+		text-align:center;
+		font-family: arial;
+		font-size:11px;
+		padding-top:2px;
+		margin: 0 auto;
+	}
+
+	/*
+	DIV that indicates where the dragged image will be placed
+	*/
+	#insertionMarker{
+		height:150px;
+		width:6px;
+		position:absolute;
+		display:none;
+
+	}
+
+	#insertionMarkerLine{
+		width:6px;	/* No need to change this value */
+		height:145px;	/* To adjust the height of the div that indicates where the dragged image will be dropped */
+
+	}
+
+	#insertionMarker img{
+		float:left;
+	}
+
+	/*
+	DIV that shows the image as you drag it
+	*/
+	#dragDropContent{
+
+		opacity:0.4;	/* 40 % opacity */
+		filter:alpha(opacity=40);	/* 40 % opacity */
+
+		/*
+		No need to change these three values
+		*/
+		position:absolute;
+		z-index:10;
+		display:none;
+
+	}
+
+
+	</style>
+	<script type="text/javascript" src="js/floating-gallery.js" ></script>
+</head>
+<body>
+With this script, you can reorganise the order of images by dragging and dropping them(as in a standard file manager). When you're finished, you can save the changes
+by a standard form submission or perhaps more elegant: by use of Ajax(Asyncron Javascript and XML).
+<form action="somePage.html" method="post">
+<div style="clear:both;padding-bottom:10px">
+	<input type="button" style="width:100px" value="Save" onclick="saveImageOrder()">
+</div>
+</form>
+<div id="GalleryContainer">
+	<div class="imageBox" id="imageBox0">
+		<div class="imageBox_theImage" style="background-image:url('example_images/image1.jpg')"></div>
+		<div class="imageBox_label"><span>Image number 1</span></div>
+	</div>
+		<div class="imageBox" id="imageBox1">
+		<div class="imageBox_theImage" style="background-image:url('example_images/image2.jpg')"></div>
+		<div class="imageBox_label"><span>Image number 2</span></div>
+	</div>
+		<div class="imageBox" id="imageBox2">
+		<div class="imageBox_theImage" style="background-image:url('example_images/image3.jpg')"></div>
+		<div class="imageBox_label"><span>Image number 3</span></div>
+	</div>
+		<div class="imageBox" id="imageBox3">
+		<div class="imageBox_theImage" style="background-image:url('example_images/image4.jpg')"></div>
+		<div class="imageBox_label"><span>Image number 4</span></div>
+	</div>
+		<div class="imageBox" id="imageBox4">
+		<div class="imageBox_theImage" style="background-image:url('example_images/image5.jpg')"></div>
+		<div class="imageBox_label"><span>Image number 5</span></div>
+	</div>
+		<div class="imageBox" id="imageBox5">
+		<div class="imageBox_theImage" style="background-image:url('example_images/image6.jpg')"></div>
+		<div class="imageBox_label"><span>Image number 6</span></div>
+	</div>
+		<div class="imageBox" id="imageBox6">
+		<div class="imageBox_theImage" style="background-image:url('example_images/image7.jpg')"></div>
+		<div class="imageBox_label"><span>Image number 7</span></div>
+	</div>
+		<div class="imageBox" id="imageBox7">
+		<div class="imageBox_theImage" style="background-image:url('example_images/image8.jpg')"></div>
+		<div class="imageBox_label"><span>Image number 8</span></div>
+	</div>
+		<div class="imageBox" id="imageBox8">
+		<div class="imageBox_theImage" style="background-image:url('example_images/image9.jpg')"></div>
+		<div class="imageBox_label"><span>Image number 9</span></div>
+	</div>
+		<div class="imageBox" id="imageBox9">
+		<div class="imageBox_theImage" style="background-image:url('example_images/image10.jpg')"></div>
+		<div class="imageBox_label"><span>Image number 10</span></div>
+	</div>
+		<div class="imageBox" id="imageBox10">
+		<div class="imageBox_theImage" style="background-image:url('example_images/image11.jpg')"></div>
+		<div class="imageBox_label"><span>Image number 11</span></div>
+	</div>
+		<div class="imageBox" id="imageBox11">
+		<div class="imageBox_theImage" style="background-image:url('example_images/image12.jpg')"></div>
+		<div class="imageBox_label"><span>Image number 12</span></div>
+	</div>
+		<div class="imageBox" id="imageBox12">
+		<div class="imageBox_theImage" style="background-image:url('example_images/image13.jpg')"></div>
+		<div class="imageBox_label"><span>Image number 13</span></div>
+	</div>
+		<div class="imageBox" id="imageBox13">
+		<div class="imageBox_theImage" style="background-image:url('example_images/image14.jpg')"></div>
+		<div class="imageBox_label"><span>Image number 14</span></div>
+	</div>
+		<div class="imageBox" id="imageBox14">
+		<div class="imageBox_theImage" style="background-image:url('example_images/image15.jpg')"></div>
+		<div class="imageBox_label"><span>Image number 15</span></div>
+	</div>
+</div>
+<div id="insertionMarker">
+	<img src="images/marker_top.gif">
+	<img src="images/marker_middle.gif" id="insertionMarkerLine">
+	<img src="images/marker_bottom.gif">
+</div>
+<div id="dragDropContent">
+</div>
+<div id="debug" style="clear:both">
+</div>
+</body>
+</html>
